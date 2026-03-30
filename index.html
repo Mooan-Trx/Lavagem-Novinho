@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavagem Novinho - Estética Automotiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Variáveis de Cores */
+        :root {
+            --primary: #007bff; 
+            --secondary: #0056b3; 
+            --dark: #0a192f;
+            --light: #f0f7ff; 
+            --accent: #25d366; 
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--light); 
+            color: #444; 
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho Interativo */
+        header { 
+            position: relative;
+            background: var(--white);
+            color: var(--dark); 
+            padding: 3rem 1rem 4rem 1rem;
+            text-align: center; 
+            overflow: hidden;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        header .logo-container {
+            position: relative;
+            /* z-index BAIXO para ficar ATRÁS das bolhas */
+            z-index: 1; 
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        header .logo-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        header p { 
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary);
+            position: relative;
+            /* z-index ALTO para o texto ficar na frente das bolhas */
+            z-index: 10; 
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        /* Bolhas Azuis e Vibrantes */
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* z-index INTERMEDIÁRIO: na frente da logo, atrás do texto */
+            z-index: 5; 
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -120px;
+            /* Gradiente azul para dar volume */
+            background: radial-gradient(circle at 30% 30%, rgba(0, 210, 255, 0.4), rgba(0, 123, 255, 0.7));
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: riseAndSway 8s infinite ease-in;
+        }
+
+        /* Tamanhos e Posições das Bolhas */
+        .bubble:nth-child(1) { left: 5%; width: 70px; height: 70px; animation-duration: 6s; opacity: 0.8; }
+        .bubble:nth-child(2) { left: 15%; width: 40px; height: 40px; animation-duration: 4s; animation-delay: 1s; opacity: 0.6; }
+        .bubble:nth-child(3) { left: 30%; width: 90px; height: 90px; animation-duration: 9s; animation-delay: 2s; opacity: 0.7; }
+        .bubble:nth-child(4) { left: 50%; width: 50px; height: 50px; animation-duration: 7s; opacity: 0.9; }
+        .bubble:nth-child(5) { left: 70%; width: 110px; height: 110px; animation-duration: 11s; animation-delay: 3s; opacity: 0.6; }
+        .bubble:nth-child(6) { left: 85%; width: 35px; height: 35px; animation-duration: 5s; animation-delay: 1.5s; opacity: 0.8; }
+        .bubble:nth-child(7) { left: 92%; width: 65px; height: 65px; animation-duration: 8s; opacity: 0.7; }
+
+        /* Animação de Subida com Balanço Lateral */
+        @keyframes riseAndSway {
+            0% { 
+                bottom: -120px; 
+                transform: translateX(0) scale(0.8); 
+                opacity: 0; 
+            }
+            20% { opacity: 0.8; }
+            50% { transform: translateX(40px) scale(1.1); }
+            100% { 
+                bottom: 110%; 
+                transform: translateX(-40px) scale(1); 
+                opacity: 0; 
+            }
+        }
+
+        /* Conteúdo Principal */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; position: relative; z-index: 3; }
+        
+        h2 { 
+            margin: 40px 0 20px; 
+            color: var(--dark); 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 i { color: var(--primary); }
+
+        .card-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,86,179,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .tabela-precos { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .tabela-precos th { 
+            text-align: left; 
+            padding: 20px; 
+            background: #f0f7ff; 
+            color: var(--secondary);
+            font-weight: 700;
+            border-bottom: 2px solid #d0e3ff;
+        }
+        .tabela-precos td { padding: 20px; border-bottom: 1px solid #f0f4f8; }
+        
+        .preco { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+        .badge { background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+        .servicos-extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card-extra { 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            transition: all 0.3s ease;
+            border: 1px solid #e1e8ed;
+        }
+        .card-extra:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,123,255,0.15); border-color: var(--primary); }
+        .card-extra i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; display: block; }
+
+        .obs-cera { 
+            background: #eef7ff; 
+            color: #0056b3; 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin: 30px 0; 
+            border-left: 5px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cta-section { text-align: center; margin: 60px 0; }
+        .btn-whatsapp { 
+            background: var(--accent); 
+            color: white; 
+            padding: 20px 40px; 
+            border-radius: 100px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 12px;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); background-color: #1ebe5d; }
+
+        .wpp-float {
+            position: fixed; width: 65px; height: 65px; bottom: 30px; right: 30px;
+            background-color: var(--accent); color: #FFF; border-radius: 50px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 100; text-decoration: none; transition: 0.3s;
+        }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 4rem 2rem; margin-top: 60px; }
+        footer p { opacity: 0.7; font-size: 0.9rem; margin-bottom: 10px; }
+
+        @media (max-width: 600px) {
+            header .logo-container { max-width: 280px; }
+            .tabela-precos thead { display: none; }
+            .tabela-precos td { display: block; text-align: right; padding: 10px 20px; }
+            .tabela-precos td::before { content: attr(data-label); float: left; font-weight: bold; color: var(--primary); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="image_2.png" alt="Lavagem Novinho - Estética Automotiva" class="logo-image">
+        </div>
+
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+
+        <p><i class="fas fa-sparkles"></i> Seu carro novo, de novo.</p>
+    </header>
+
+    <div class="container">
+        <div class="card-container">
+            <h2><i class="fas fa-car-clean"></i> Tabela de Preços</h2>
+            <table class="tabela-precos">
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>COMERCIAL</th>
+                        <th>DETALHADA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Categoria"><strong>Motos</strong></td>
+                        <td data-label="Comercial" class="preco">R$ 40,00</td>
+                        <td data-label="Detalhada" class="preco">R$ 80,00 <span class="badge">TOP</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Categoria"><strong>Carros Passeio</strong></td>
+                        <td data-label="Comercial" class="preco">R$ 50,00</td>
+                        <td data-label="Detalhada" class="preco">R$ 100,00 <span class="badge">TOP</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Categoria"><strong>Caminhonetes / SUV</strong></td>
+                        <td data-label="Comercial" class="preco">R$ 80,00</td>
+                        <td data-label="Detalhada" class="preco">R$ 150,00 <span class="badge">TOP</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="obs-cera">
+                <i class="fas fa-info-circle fa-2x"></i>
+                <span>
+                    <strong>Upgrade de Brilho:</strong> Adicione aplicação de cera na lavagem comercial por apenas <strong>R$ 20,00</strong>. 
+                </span>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-gem"></i> Serviços Especiais</h2>
+        <div class="servicos-extras">
+            <div class="card-extra">
+                <i class="fas fa-lightbulb"></i>
+                <h4>Faróis Novos</h4>
+                <p>Polimento restaurador para máxima visibilidade.</p>
+                <p class="preco">R$ 80,00</p>
+            </div>
+            <div class="card-extra">
+                <i class="fas fa-couch"></i>
+                <h4>Interior Basic</h4>
+                <p>Higienização comercial completa do habitáculo.</p>
+                <p class="preco">R$ 300,00</p>
+            </div>
+            <div class="card-extra">
+                <i class="fas fa-hand-sparkles"></i>
+                <h4>Interior Premium</h4>
+                <p>Extração profunda, teto, carpetes e hidratação.</p>
+                <p class="preco">R$ 600,00</p>
+            </div>
+        </div>
+
+        <section class="cta-section">
+            <a href="https://wa.me/5554996910847?text=Olá! Gostaria de fazer um orçamento para meu veículo." class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> AGENDAR AGORA
+            </a>
+        </section>
+    </div>
+
+    <a href="https://wa.me/5554996910847" class="wpp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <h3 style="margin-bottom: 20px; font-family: 'Montserrat';">LAVAGEM NOVINHO</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Rua dos Carteiros, 2106 - Bairro Santa Fé</p>
+        <p>Caxias do Sul / RS</p>
+        <p><i class="fas fa-phone-alt"></i> (54) 99691-0847</p>
+    </footer>
+
+</body>
+</html>
